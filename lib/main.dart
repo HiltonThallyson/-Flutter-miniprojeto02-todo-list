@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
           colorScheme: ThemeData().colorScheme.copyWith(
                 primary: Colors.purple,
@@ -47,15 +48,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _tarefas.add(novaTarefa);
     });
-
-    print(titulo);
   }
 
   List<Tarefa> _tarefas = [
     Tarefa(
-        id: '2',
-        titulo: 'titulo',
-        data: DateTime(2021, 04, 30),
+        id: '1',
+        titulo: 'Renovar seguro do carro',
+        data: DateTime(2022, 03, 30),
         prioridade: 'ALTA',
         criacao: DateTime.now(),
         cor: Colors.orange)
@@ -68,21 +67,32 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text('To Do List'),
       ),
       body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              TarefaLista(_tarefas),
+            ],
+          )),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return TarefaForm(_novaTarefa);
+              });
+        },
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        label: Text('Nova Tarefa'),
+        icon: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+/*Column(
           children: <Widget>[
             TarefaForm(_novaTarefa),
             SizedBox(
               height: 10,
             ),
-            Column(
-              children: [
-                TarefaLista(_tarefas),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+            Column( */

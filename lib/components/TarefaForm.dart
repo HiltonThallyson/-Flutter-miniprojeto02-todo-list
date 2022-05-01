@@ -36,6 +36,8 @@ class _TarefaFormState extends State<TarefaForm> {
       return;
     }
 
+    Navigator.pop(context);
+
     widget.onSubmit(
         titulo, _dataSelecionada, observacao, prioridade, corPrioridade);
   }
@@ -59,54 +61,58 @@ class _TarefaFormState extends State<TarefaForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-        child: Column(children: <Widget>[
-      TextField(
-        controller: _tarefaController,
-        decoration: InputDecoration(labelText: 'Tarefa'),
-      ),
-      TextField(
-        controller: _observacaoController,
-        decoration: InputDecoration(labelText: 'Observacoes'),
-      ),
-      Container(
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-        alignment: Alignment.centerLeft,
-        child: DropdownButton(
-          value: _prioridade,
-          onChanged: <String>(String prioridade) {
-            setState(() {
-              _prioridade = prioridade.toString();
-            });
-          },
-          items: [
-            DropdownMenuItem(child: Text('BAIXA'), value: 'BAIXA'),
-            DropdownMenuItem(
-              child: Text('NORMAL'),
-              value: 'NORMAL',
-            ),
-            DropdownMenuItem(
-              child: Text('ALTA'),
-              value: 'ALTA',
-            ),
-          ],
+        child: Container(
+      padding: EdgeInsets.all(15),
+      child: Column(children: <Widget>[
+        TextField(
+          controller: _tarefaController,
+          decoration: InputDecoration(labelText: 'Tarefa'),
         ),
-      ),
-      Container(
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Text(
-                  'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}'),
-            ),
-            TextButton(
-                onPressed: _showDatePicker, child: Text('Selecionar data'))
-          ],
+        TextField(
+          controller: _observacaoController,
+          decoration: InputDecoration(labelText: 'Observacoes'),
         ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ElevatedButton(onPressed: _submitForm, child: Text('Confirmar')),
-      ),
-    ]));
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+          alignment: Alignment.centerLeft,
+          child: DropdownButton(
+            value: _prioridade,
+            onChanged: <String>(String prioridade) {
+              setState(() {
+                _prioridade = prioridade.toString();
+              });
+            },
+            items: [
+              DropdownMenuItem(child: Text('BAIXA'), value: 'BAIXA'),
+              DropdownMenuItem(
+                child: Text('NORMAL'),
+                value: 'NORMAL',
+              ),
+              DropdownMenuItem(
+                child: Text('ALTA'),
+                value: 'ALTA',
+              ),
+            ],
+          ),
+        ),
+        Container(
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                    'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}'),
+              ),
+              TextButton(
+                  onPressed: _showDatePicker, child: Text('Selecionar data'))
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child:
+              ElevatedButton(onPressed: _submitForm, child: Text('Confirmar')),
+        ),
+      ]),
+    ));
   }
 }
