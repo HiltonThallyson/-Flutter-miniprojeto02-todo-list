@@ -6,6 +6,8 @@ import 'package:f2_todolist/components/TarefaForm.dart';
 import 'package:f2_todolist/components/TarefaLista.dart';
 import 'package:f2_todolist/models/tarefa.dart';
 import 'package:flutter/material.dart';
+import './utils/app-routes.dart';
+import './screens/taskdetail.dart';
 
 import 'package:intl/intl.dart';
 
@@ -17,13 +19,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MyHomePage(),
+      initialRoute: AppRoutes.HOME,
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
           colorScheme: ThemeData().colorScheme.copyWith(
                 primary: Colors.purple,
                 secondary: Colors.red[700],
               )),
+      routes: {
+        AppRoutes.HOME: (context) => MyHomePage(),
+        AppRoutes.DETAIL: (context) => TaskDetail(),
+      },
     );
   }
 }
@@ -88,11 +94,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-/*Column(
-          children: <Widget>[
-            TarefaForm(_novaTarefa),
-            SizedBox(
-              height: 10,
-            ),
-            Column( */
