@@ -115,7 +115,12 @@ class _TarefaListaState extends State<TarefaLista> {
                 );
               },
             )
-          : Text('Nenhuma tarefa cadastrada!')),
+          : Center(
+              child: Text(
+                'Nenhuma tarefa cadastrada!',
+                style: TextStyle(fontSize: 20),
+              ),
+            )),
     );
   }
 }

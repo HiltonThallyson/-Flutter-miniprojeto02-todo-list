@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
         titulo: 'Renovar seguro do carro',
         data: DateTime(2022, 03, 30),
         prioridade: 'ALTA',
-        criacao: DateTime.now(),
+        criacao: DateTime(2022, 02, 01),
         cor: Colors.orange)
   ];
 
