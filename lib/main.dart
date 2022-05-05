@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:f2_todolist/components/TarefaForm.dart';
 import 'package:f2_todolist/components/TarefaLista.dart';
+import 'package:f2_todolist/components/filtro.dart';
 import 'package:f2_todolist/models/tarefa.dart';
 import 'package:flutter/material.dart';
 import './utils/app-routes.dart';
@@ -22,10 +23,11 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.HOME,
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
-          colorScheme: ThemeData().colorScheme.copyWith(
-                primary: Colors.purple,
-                secondary: Colors.red[700],
-              )),
+        colorScheme: ThemeData().colorScheme.copyWith(
+              primary: Colors.purple,
+              secondary: Colors.red[700],
+            ),
+      ),
       routes: {
         AppRoutes.HOME: (context) => MyHomePage(),
         AppRoutes.DETAIL: (context) => TaskDetail(),
@@ -40,6 +42,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  String _filtroAplicado = '';
   void _novaTarefa(String titulo, DateTime data, String observacao,
       String prioridade, Color cor) {
     Tarefa novaTarefa = Tarefa(
@@ -56,6 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List<Tarefa> _tarefasFiltradas = [];
+
   List<Tarefa> _tarefas = [
     Tarefa(
         id: '1',
@@ -67,18 +72,79 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   @override
+  void initState() {
+    setState(() {
+      _tarefasFiltradas = _tarefas;
+    });
+    super.initState();
+  }
+
+  _filtrarTarefas(String valor, String tipo, DateTime data) {
+    setState(() {
+      if (tipo == 'prioridade') {
+        _filtroAplicado = valor;
+        _tarefasFiltradas =
+            _tarefas.where((tarefa) => tarefa.prioridade == valor).toList();
+      } else if (tipo == 'data') {
+        _filtroAplicado = DateFormat('dd/MM/y').format(data).toString();
+        _tarefasFiltradas = _tarefas
+            .where((tarefa) => tarefa.data.difference(data).inDays == 0)
+            .toList();
+      }
+    });
+  }
+
+  _limparFiltros() {
+    setState(() {
+      _filtroAplicado = '';
+      _tarefasFiltradas = _tarefas;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('To Do List'),
       ),
-      body: Container(
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              TarefaLista(_tarefas),
-            ],
-          )),
+      body: Column(
+        children: [
+          Container(
+              margin: EdgeInsets.all(10),
+              alignment: Alignment.topLeft,
+              child: Row(
+                children: [
+                  Text(
+                    '${_filtroAplicado}',
+                    style: TextStyle(fontSize: 10),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  (_filtroAplicado != ''
+                      ? GestureDetector(
+                          onTap: _limparFiltros,
+                          child: Icon(Icons.highlight_remove_sharp))
+                      : Text('')),
+                ],
+              )),
+          InkWell(
+            onLongPress: () => showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Container(height: 200, child: Filtro(_filtrarTarefas));
+              },
+            ),
+            child: Container(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    TarefaLista(_tarefasFiltradas),
+                  ],
+                )),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           showModalBottomSheet(
