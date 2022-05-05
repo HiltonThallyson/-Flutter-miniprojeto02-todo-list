@@ -23,11 +23,14 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.HOME,
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
-        colorScheme: ThemeData().colorScheme.copyWith(
-              primary: Colors.purple,
-              secondary: Colors.red[700],
-            ),
-      ),
+          colorScheme: ThemeData().colorScheme.copyWith(
+                primary: Colors.purple,
+                secondary: Colors.red[700],
+              ),
+          textTheme: const TextTheme().copyWith(
+            headline4: TextStyle(fontSize: 13, color: Colors.black),
+            headline3: TextStyle(fontSize: 16, color: Colors.black),
+          )),
       routes: {
         AppRoutes.HOME: (context) => MyHomePage(),
         AppRoutes.DETAIL: (context) => TaskDetail(),
@@ -116,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Text(
                     '${_filtroAplicado}',
-                    style: TextStyle(fontSize: 10),
+                    style: Theme.of(context).textTheme.headline4,
                   ),
                   SizedBox(
                     width: 10,

@@ -65,12 +65,18 @@ class _TarefaFormState extends State<TarefaForm> {
       padding: EdgeInsets.all(15),
       child: Column(children: <Widget>[
         TextField(
+          style: Theme.of(context).textTheme.headline3,
           controller: _tarefaController,
-          decoration: InputDecoration(labelText: 'Tarefa'),
+          decoration: InputDecoration(
+            labelText: 'Tarefa',
+          ),
         ),
         TextField(
+          style: Theme.of(context).textTheme.headline3,
           controller: _observacaoController,
-          decoration: InputDecoration(labelText: 'Observacoes'),
+          decoration: InputDecoration(
+            labelText: 'Observacoes',
+          ),
         ),
         Container(
           margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -83,13 +89,24 @@ class _TarefaFormState extends State<TarefaForm> {
               });
             },
             items: [
-              DropdownMenuItem(child: Text('BAIXA'), value: 'BAIXA'),
               DropdownMenuItem(
-                child: Text('NORMAL'),
+                  child: Text(
+                    'BAIXA',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  value: 'BAIXA'),
+              DropdownMenuItem(
+                child: Text(
+                  'NORMAL',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
                 value: 'NORMAL',
               ),
               DropdownMenuItem(
-                child: Text('ALTA'),
+                child: Text(
+                  'ALTA',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
                 value: 'ALTA',
               ),
             ],
@@ -100,10 +117,17 @@ class _TarefaFormState extends State<TarefaForm> {
             children: <Widget>[
               Expanded(
                 child: Text(
-                    'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}'),
+                  'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
               ),
               TextButton(
-                  onPressed: _showDatePicker, child: Text('Selecionar data'))
+                  onPressed: _showDatePicker,
+                  child: Text(
+                    'Selecionar data',
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                  ))
             ],
           ),
         ),

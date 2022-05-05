@@ -86,7 +86,7 @@ class _TarefaListaState extends State<TarefaLista> {
                             children: [
                               Text(
                                 tarefa.titulo,
-                                style: TextStyle(fontSize: 16),
+                                style: Theme.of(context).textTheme.headline3,
                               ),
                               RichText(
                                   text: TextSpan(

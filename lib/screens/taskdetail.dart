@@ -28,11 +28,10 @@ class TaskDetail extends StatelessWidget {
                         children: [
                           Expanded(
                             child: Text(
-                                'Observações: ${args.tarefa.observacao == null ? '' : args.tarefa.observacao}',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                )),
-                          ),
+                              'Observações: ${args.tarefa.observacao == null ? '' : args.tarefa.observacao}',
+                              style: Theme.of(context).textTheme.headline3,
+                            ),
+                          )
                         ],
                       ),
                       SizedBox(

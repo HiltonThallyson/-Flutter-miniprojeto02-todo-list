@@ -48,7 +48,7 @@ class _FiltroState extends State<Filtro> {
               children: [
                 Text(
                   'Filtro: ',
-                  style: TextStyle(fontSize: 16),
+                  style: Theme.of(context).textTheme.headline3,
                 ),
                 DropdownButton(
                   value: _tipoFiltro,
@@ -56,12 +56,13 @@ class _FiltroState extends State<Filtro> {
                     DropdownMenuItem(
                       child: Text(
                         'prioridade',
-                        style: TextStyle(fontSize: 13),
+                        style: Theme.of(context).textTheme.headline3,
                       ),
                       value: 'prioridade',
                     ),
                     DropdownMenuItem(
-                      child: Text('data', style: TextStyle(fontSize: 13)),
+                      child: Text('data',
+                          style: Theme.of(context).textTheme.headline3),
                       value: 'data',
                     ),
                   ],
@@ -76,23 +77,24 @@ class _FiltroState extends State<Filtro> {
             (_tipoFiltro == 'prioridade'
                 ? Row(
                     children: [
-                      Text('Valor: ', style: TextStyle(fontSize: 16)),
+                      Text('Valor: ',
+                          style: Theme.of(context).textTheme.headline3),
                       DropdownButton(
                           value: _valorPrioridade,
                           items: [
                             DropdownMenuItem(
-                              child:
-                                  Text('ALTA', style: TextStyle(fontSize: 13)),
+                              child: Text('ALTA',
+                                  style: Theme.of(context).textTheme.headline4),
                               value: 'ALTA',
                             ),
                             DropdownMenuItem(
                               child: Text('NORMAL',
-                                  style: TextStyle(fontSize: 13)),
+                                  style: Theme.of(context).textTheme.headline4),
                               value: 'NORMAL',
                             ),
                             DropdownMenuItem(
-                              child:
-                                  Text('BAIXA', style: TextStyle(fontSize: 13)),
+                              child: Text('BAIXA',
+                                  style: Theme.of(context).textTheme.headline4),
                               value: 'BAIXA',
                             ),
                           ],
@@ -107,15 +109,24 @@ class _FiltroState extends State<Filtro> {
                     children: <Widget>[
                       Expanded(
                         child: Text(
-                            'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}'),
+                          'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}',
+                          style: Theme.of(context).textTheme.headline3,
+                        ),
                       ),
                       TextButton(
-                          onPressed: _showDatePicker,
-                          child: Text('Selecionar data'))
+                        onPressed: _showDatePicker,
+                        child: Text(
+                          'Selecionar data',
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.primary),
+                        ),
+                      )
                     ],
                   )),
             ElevatedButton(
-                onPressed: _submitForm, child: Text('Aplicar filtro'))
+                onPressed: _submitForm,
+                child: Text('Aplicar filtro',
+                    style: Theme.of(context).textTheme.headline3))
           ],
         ),
       ),
