@@ -1,4 +1,4 @@
-# f2_todolist
+# miniprojeto02
 
 A new Flutter project.
 

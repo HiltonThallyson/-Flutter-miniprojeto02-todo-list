@@ -8,8 +8,9 @@ import '../models/screenArgs.dart';
 class TarefaLista extends StatefulWidget {
   List<Tarefa> _tarefasFiltradas;
   List<Tarefa> _tarefas;
+  String _filtro;
 
-  TarefaLista(this._tarefasFiltradas, this._tarefas);
+  TarefaLista(this._tarefasFiltradas, this._tarefas, this._filtro);
 
   @override
   State<TarefaLista> createState() => _TarefaListaState();
@@ -33,8 +34,10 @@ class _TarefaListaState extends State<TarefaLista> {
 
   _removeItem(index) {
     setState(() {
-      widget._tarefas.removeWhere((tarefa) =>
-          tarefa.id == widget._tarefasFiltradas.elementAt(index).id);
+      if (widget._filtro != '') {
+        widget._tarefas.removeWhere((tarefa) =>
+            tarefa.id == widget._tarefasFiltradas.elementAt(index).id);
+      }
       widget._tarefasFiltradas.removeAt(index);
     });
   }
