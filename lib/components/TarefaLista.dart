@@ -124,7 +124,7 @@ class _TarefaListaState extends State<TarefaLista> {
           : Center(
               child: Text(
                 'Nenhuma tarefa cadastrada!',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: Colors.black),
               ),
             )),
     );
