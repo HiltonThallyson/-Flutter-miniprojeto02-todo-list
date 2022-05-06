@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    TarefaLista(_tarefasFiltradas),
+                    TarefaLista(_tarefasFiltradas, _tarefas),
                   ],
                 )),
           ),

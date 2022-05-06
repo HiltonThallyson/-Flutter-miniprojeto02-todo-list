@@ -6,9 +6,10 @@ import 'package:intl/intl.dart';
 import '../models/screenArgs.dart';
 
 class TarefaLista extends StatefulWidget {
-  List<Tarefa> _tarefaLista;
+  List<Tarefa> _tarefasFiltradas;
+  List<Tarefa> _tarefas;
 
-  TarefaLista(this._tarefaLista);
+  TarefaLista(this._tarefasFiltradas, this._tarefas);
 
   @override
   State<TarefaLista> createState() => _TarefaListaState();
@@ -32,7 +33,9 @@ class _TarefaListaState extends State<TarefaLista> {
 
   _removeItem(index) {
     setState(() {
-      widget._tarefaLista.removeAt(index);
+      widget._tarefas.removeWhere((tarefa) =>
+          tarefa.id == widget._tarefasFiltradas.elementAt(index).id);
+      widget._tarefasFiltradas.removeAt(index);
     });
   }
 
@@ -40,11 +43,11 @@ class _TarefaListaState extends State<TarefaLista> {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: (widget._tarefaLista.length > 0
+      child: (widget._tarefasFiltradas.length > 0
           ? ListView.builder(
-              itemCount: widget._tarefaLista.length,
+              itemCount: widget._tarefasFiltradas.length,
               itemBuilder: (context, index) {
-                final tarefa = widget._tarefaLista[index];
+                final tarefa = widget._tarefasFiltradas[index];
                 return Card(
                   child: InkWell(
                     onTap: () {

@@ -44,11 +44,19 @@ class _TarefaFormState extends State<TarefaForm> {
 
   _showDatePicker() {
     showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime.now(),
-            lastDate: DateTime(2023))
-        .then((pickedDate) {
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime(2023),
+        builder: (context, child) {
+          return Theme(
+              data: ThemeData.light().copyWith(
+                colorScheme: ColorScheme.light(
+                  primary: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              child: child as Widget);
+        }).then((pickedDate) {
       if (pickedDate == null) {
         return;
       }
